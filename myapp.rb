@@ -1,5 +1,37 @@
 require 'sinatra'
+require 'sinatra/reloader'
 
 get '/frank-says' do
-  'Hello world!'
+  guess = params['guess'].to_i
+  inc_guess(params)
+  result = match(guess)
+  change_sec(@@guess_num, guess)
+  number = @@secret_number
+  erb :index, :locals => {:number => number, :guess => guess, :result => result}
+end
+
+@@guess_num = 3
+@@secret_number = rand(1..20)
+
+def inc_guess(params)
+  if params.include?(:guess)
+    @@guess_num -= 1
+  end
+end
+
+def change_sec(times, guess)
+  if times == 0 || guess == @@secret_number
+    @@secret_number = rand(1..20)
+    @@guess_num = 3
+  end
+end
+
+def match(guess)
+  if guess < @@secret_number
+    return "Too low!"
+  elsif guess == @@secret_number
+    return "Perfect guess! Let's play again! Enter a guess."
+  else
+    return "Too high!"
+  end
 end

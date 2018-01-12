@@ -1,0 +1,20 @@
+<html>
+  <head></head>
+  <body>
+    <h1> What's your guess? (1-20) <br/> You have 3 tries!</h1>
+    <form>
+      <input type='text' name='guess' autofocus="autofocus" />
+      <input type='submit' value='Guess the number!'/>
+    </form>
+    <h2>
+      <% if params.include?(:guess) %>
+        <%= result %>
+      <% end %>
+      <br/>
+      <% if @@guess_num == 1 %>
+        The secret number is <%= number%>.
+        <br/> Let's play again! Enter a guess.
+      <% end %>
+    </h2>
+  </body>
+</html>
