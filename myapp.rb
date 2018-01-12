@@ -1,7 +1,9 @@
 require 'sinatra'
-require 'sinatra/reloader'
+if development?
+  require 'sinatra/reloader'
+end
 
-get '/frank-says' do
+get '/' do
   guess = params['guess'].to_i
   inc_guess(params)
   result = match(guess)
