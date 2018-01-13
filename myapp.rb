@@ -3,7 +3,12 @@ if development?
   require 'sinatra/reloader'
 end
 
-get '/' do
+get '/hangman' do
+  erb :hangman, :locals => {}
+end
+
+
+get '/random' do
   guess = params['guess'].to_i
   cheat = params['cheat']
   result = match(guess)
@@ -11,7 +16,7 @@ get '/' do
 
   change_sec(@@guess_num, guess)
   number = @@secret_number
-  erb :index, :locals => {:number => number, :guess => guess, :result => result, :cheat => cheat}
+  erb :random, :locals => {:number => number, :guess => guess, :result => result, :cheat => cheat}
 end
 
 @@guess_num = 3
