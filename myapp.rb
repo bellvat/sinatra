@@ -5,26 +5,31 @@ end
 
 get '/' do
   guess = params['guess'].to_i
-  inc_guess(params)
+  cheat = params['cheat']
   result = match(guess)
+  dec_guess(params)
+
   change_sec(@@guess_num, guess)
   number = @@secret_number
-  erb :index, :locals => {:number => number, :guess => guess, :result => result}
+  erb :index, :locals => {:number => number, :guess => guess, :result => result, :cheat => cheat}
 end
 
 @@guess_num = 3
 @@secret_number = rand(1..20)
 
-def inc_guess(params)
+def dec_guess(params)
   if params.include?(:guess)
     @@guess_num -= 1
   end
 end
 
 def change_sec(times, guess)
-  if times == 0 || guess == @@secret_number
+  if times == 0
     @@secret_number = rand(1..20)
     @@guess_num = 3
+  elsif guess == @@secret_number
+    @@secret_number = rand(1..20)
+    @@guess_num = 4
   end
 end
 
