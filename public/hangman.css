@@ -1,0 +1,12 @@
+.letters{
+  width: 600px;
+  height: 600px;
+  background-color: pink;
+}
+.box{
+  float: left;
+  width: 20%;
+  height: 10%;
+  padding: 2pt;
+  border: 1pt solid white;
+}
