@@ -3,11 +3,6 @@ if development?
   require 'sinatra/reloader'
 end
 
-get '/hangman' do
-  erb :hangman, :locals => {}
-end
-
-
 get '/random' do
   guess = params['guess'].to_i
   cheat = params['cheat']
@@ -19,6 +14,23 @@ get '/random' do
   erb :random, :locals => {:number => number, :guess => guess, :result => result, :cheat => cheat}
 end
 
+get '/hangman' do
+
+  erb :hangman, :locals => {}
+end
+#for hangman
+#random generated word
+#prompt for users to enter letter
+#show letter on screen if part of word
+@@word = "Hello"
+def parse_word(word)
+  word.downcase.split('')
+end
+
+def match(word, letter)
+  word.include?(letter)
+end
+#for random number
 @@guess_num = 3
 @@secret_number = rand(1..20)
 
