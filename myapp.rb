@@ -15,20 +15,39 @@ get '/random' do
 end
 
 get '/hangman' do
-
-  erb :hangman, :locals => {}
+  alphabet = params['clickedAlpha']
+  length = @@word.size
+  matched = alpha_match(@@word, alphabet)
+  place = find_index(@@word, alphabet)
+  erb :hangman, :locals => {:alphabet => alphabet, :place => place, :matched => matched, :length => length}
 end
 #for hangman
 #random generated word
 #prompt for users to enter letter
 #show letter on screen if part of word
-@@word = "Hello"
+@@word = "hello"
 def parse_word(word)
   word.downcase.split('')
 end
 
-def match(word, letter)
-  word.include?(letter)
+def alpha_match(word, letter)
+  if !letter.nil?
+    word.include?(letter)
+  end
+end
+
+def find_index(word, letter)
+  if !letter.nil?
+
+     arr = parse_word(word)
+     inds = []
+     arr.each_with_index do |w,ind|
+       if w == letter
+         inds << ind
+       end
+     end
+     inds
+   end
 end
 #for random number
 @@guess_num = 3

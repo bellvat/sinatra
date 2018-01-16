@@ -3,10 +3,24 @@
   height: 600px;
   background-color: pink;
 }
+
 .box{
   float: left;
   width: 20%;
   height: 10%;
   padding: 2pt;
   border: 1pt solid white;
+}
+
+.play{
+  overflow:auto;
+}
+
+
+.line{
+  float: left;
+  width: 100px;
+  height: 2px;
+  margin: 2px;
+  border-bottom: 3px solid black;
 }
