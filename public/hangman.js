@@ -24,6 +24,7 @@ for(let e in alphabet){
 const form = document.createElement('form')
 form.id = "form_id"
 form.style.display = 'none'
+form.method = "post"
 letters.appendChild(form)
 const input = document.createElement('input')
 input.id = "letter_input"
@@ -51,15 +52,17 @@ matchingIndex()
 function matchingIndex(){
   let letter = arr.name
   let arr_parse = JSON.parse(arr.value)
-  console.log(arr_parse)
   //if (arr_parse !== nil){
-    for (let num in arr_parse){
-      const selectedLine = document.querySelector(`[id='${arr_parse[num]}']`)
-      const font = document.createElement('h2')
-      font.textContent = letter
-      selectedLine.appendChild(font)
-      console.log(selectedLine.textContent)
-      console.log(letter)
-    }
+  let keys = Object.keys(arr_parse)
+    keys.forEach(function(k){
+      arr_parse[k].forEach(function(v){
+        const selectedLine = document.querySelector(`[id='${v}']`)
+        const font = document.createElement('h2')
+        font.textContent = k
+        selectedLine.appendChild(font)
+        console.log(selectedLine.textContent)
+        // console.log(letter)
+      })
+    })
   //}
 }

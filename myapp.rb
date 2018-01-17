@@ -1,52 +1,65 @@
 require 'sinatra'
+require 'json'
 if development?
   require 'sinatra/reloader'
 end
+enable :sessions
 
 get '/random' do
   guess = params['guess'].to_i
   cheat = params['cheat']
   result = match(guess)
   dec_guess(params)
-
   change_sec(@@guess_num, guess)
   number = @@secret_number
   erb :random, :locals => {:number => number, :guess => guess, :result => result, :cheat => cheat}
 end
 
 get '/hangman' do
+  alphabet = session[:alphabet]
+  length = @@word.size
+  place = find_index(@@word, @@arr_alph)
+  erb :hangman, :locals => {:alphabet => alphabet, :place => place, :length => length}
+end
+
+post '/hangman' do
   alphabet = params['clickedAlpha']
   length = @@word.size
-  matched = alpha_match(@@word, alphabet)
-  place = find_index(@@word, alphabet)
-  erb :hangman, :locals => {:alphabet => alphabet, :place => place, :matched => matched, :length => length}
+  alpha_match(@@word, alphabet)
+  place = find_index(@@word, @@arr_alph)
+  erb :hangman, :locals => {:alphabet => alphabet, :place => place, :length => length}
 end
 #for hangman
 #random generated word
 #prompt for users to enter letter
 #show letter on screen if part of word
-@@word = "hello"
+@@arr_alph = []
+@@word = 'hello'
 def parse_word(word)
   word.downcase.split('')
 end
 
 def alpha_match(word, letter)
   if !letter.nil?
-    word.include?(letter)
+    if word.include?(letter)
+      @@arr_alph << letter if !@@arr_alph.include?(letter)
+    end
   end
 end
 
 def find_index(word, letter)
   if !letter.nil?
-
      arr = parse_word(word)
-     inds = []
-     arr.each_with_index do |w,ind|
-       if w == letter
-         inds << ind
+     inds = {}
+     letter.each do |l|
+       arr.each_with_index do |w,ind|
+         if w == l
+           inds[l] ||= []
+           inds[l] << ind
+         end
        end
      end
-     inds
+     inds.to_json
    end
 end
 #for random number
