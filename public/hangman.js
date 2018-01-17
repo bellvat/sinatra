@@ -1,6 +1,6 @@
 const word = document.querySelector('#word_input')
-const lines = document.querySelector('.play')
 word.style.display = 'none'
+const lines = document.querySelector('.play')
 let wordLength = word.value - 1
 for (let i = 0; i <= wordLength; i++){
   let line = document.createElement('div')
@@ -31,6 +31,7 @@ const button = document.createElement('button')
 form.appendChild(input)
 form.appendChild(button)
 
+
 //selecting alphabet
 function whichAlphabet(e){
   let oneAlphabet = e.target.id
@@ -41,4 +42,24 @@ function whichAlphabet(e){
 }
 document.addEventListener('click', whichAlphabet)
 
-const place = document.querySelector('#l_input')
+
+const arr = document.querySelector('#arr')
+arr.style.display = 'none'
+
+matchingIndex()
+
+function matchingIndex(){
+  let letter = arr.name
+  let arr_parse = JSON.parse(arr.value)
+  console.log(arr_parse)
+  //if (arr_parse !== nil){
+    for (let num in arr_parse){
+      const selectedLine = document.querySelector(`[id='${arr_parse[num]}']`)
+      const font = document.createElement('h2')
+      font.textContent = letter
+      selectedLine.appendChild(font)
+      console.log(selectedLine.textContent)
+      console.log(letter)
+    }
+  //}
+}

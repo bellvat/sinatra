@@ -13,6 +13,7 @@
 }
 
 .play{
+  height: 100px;
   overflow:auto;
 }
 
@@ -20,7 +21,8 @@
 .line{
   float: left;
   width: 100px;
-  height: 2px;
+  height: 90px;
   margin: 2px;
   border-bottom: 3px solid black;
+  text-align: center;
 }
