@@ -26,3 +26,17 @@
   border-bottom: 3px solid black;
   text-align: center;
 }
+
+.left{
+  float:left;
+}
+
+.stick{
+  float: right;
+  width: 600px;
+  height: 600px;
+}
+
+hr{
+  border-color: black;
+}

@@ -7,13 +7,17 @@
 <body>
   <input id = "word_input" value = "<%= length %>" />
   <input id = 'arr' name= '<%= alphabet %>' value = '<%= place %>'/>
-
-  <div class='play' >
+  <input id = 'guess' value='<%= @@hangman_guess %>' />
+  <div class='left'>
+    <div class='play' >
+    </div>
+    <div class='letters'>
+    </div>
+    <% if @@hangman_guess == 9 %>
+      <%= @@word %>
+    <% end %>
   </div>
-  <div class='letters'>
+  <div class='stick'>
   </div>
-  <% if @@hangman_guess == 9 %>
-    <%= @@word %>
-  <% end %>
 </body>
 </html
