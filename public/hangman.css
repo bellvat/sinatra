@@ -1,7 +1,6 @@
 .letters{
   width: 600px;
   height: 600px;
-  background-color: pink;
 }
 
 .box{
@@ -9,20 +8,27 @@
   width: 20%;
   height: 10%;
   padding: 2pt;
-  border: 1pt solid white;
+  border: 1pt solid black;
+  color: green;
+  font-size: 16pt;
 }
 
 .play{
   height: 100px;
   overflow:auto;
+  margin-bottom: 20px;
 }
 
+body{
+  text-align: center;
+  font-family: sans-serif;
+}
 
 .line{
   float: left;
   width: 100px;
   height: 90px;
-  margin: 2px;
+  margin: 3px;
   border-bottom: 3px solid black;
   text-align: center;
 }
@@ -39,4 +45,8 @@
 
 hr{
   border-color: black;
+}
+
+.clicked{
+  color: gray;
 }

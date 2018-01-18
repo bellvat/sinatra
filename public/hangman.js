@@ -1,5 +1,6 @@
 const word = document.querySelector('#word_input')
 word.style.display = 'none'
+//creating blank lines
 const lines = document.querySelector('.play')
 let wordLength = word.value - 1
 for (let i = 0; i <= wordLength; i++){
@@ -32,17 +33,23 @@ const button = document.createElement('button')
 form.appendChild(input)
 form.appendChild(button)
 
+function submitForm(){
+  document.getElementById('form_id').submit()
+}
 
 //selecting alphabet
 function whichAlphabet(e){
+  if(e.target.className !== 'box') return
+  e.target.classList.add = 'clicked'
+  console.log(e.target)
   let oneAlphabet = e.target.id
   const inputReady = document.querySelector('#letter_input')
   inputReady.name = "clickedAlpha"
   inputReady.value = oneAlphabet
-  document.getElementById('form_id').submit()
+  submitForm()
 }
-document.addEventListener('click', whichAlphabet)
 
+document.addEventListener('click', whichAlphabet)
 
 const arr = document.querySelector('#arr')
 arr.style.display = 'none'
@@ -52,7 +59,6 @@ matchingIndex()
 function matchingIndex(){
   let letter = arr.name
   let arr_parse = JSON.parse(arr.value)
-  //if (arr_parse !== nil){
   let keys = Object.keys(arr_parse)
     keys.forEach(function(k){
       arr_parse[k].forEach(function(v){
@@ -61,10 +67,8 @@ function matchingIndex(){
         font.textContent = k
         selectedLine.appendChild(font)
         console.log(selectedLine.textContent)
-        // console.log(letter)
       })
     })
-  //}
 }
 
 //building stick figure

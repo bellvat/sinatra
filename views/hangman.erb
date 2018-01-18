@@ -1,6 +1,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   <script type="text/javascript" src="hangman.js" defer></script>
   <link rel="stylesheet" href="hangman.css" />
 </head>
@@ -8,6 +9,7 @@
   <input id = "word_input" value = "<%= length %>" />
   <input id = 'arr' name= '<%= alphabet %>' value = '<%= place %>'/>
   <input id = 'guess' value='<%= @@hangman_guess %>' />
+  <h2>Let's Play Hangman! </h2>
   <div class='left'>
     <div class='play' >
     </div>
