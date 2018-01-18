@@ -16,7 +16,7 @@ get '/random' do
 end
 
 get '/hangman' do
-  alphabet = session[:alphabet]
+  alphabet = params['clickedAlpha']
   length = @@word.size
   place = find_index(@@word, @@arr_alph)
   erb :hangman, :locals => {:alphabet => alphabet, :place => place, :length => length}
@@ -24,6 +24,7 @@ end
 
 post '/hangman' do
   alphabet = params['clickedAlpha']
+  h_guess
   length = @@word.size
   alpha_match(@@word, alphabet)
   place = find_index(@@word, @@arr_alph)
@@ -35,6 +36,23 @@ end
 #show letter on screen if part of word
 @@arr_alph = []
 @@word = 'hello'
+@@hangman_guess = 0
+
+def get_words(file)
+  lines = File.readlines(file)
+  num = rand(1000)
+  @@word = lines[num].strip
+end
+
+def h_guess
+  if @@hangman_guess == 8
+    get_words('words.txt')
+    @@hangman_guess = 0
+    @@arr_alph = []
+  else
+    @@hangman_guess += 1
+  end
+end
 def parse_word(word)
   word.downcase.split('')
 end
