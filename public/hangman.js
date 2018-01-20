@@ -10,13 +10,14 @@ for (let i = 0; i <= wordLength; i++){
   lines.appendChild(line)
 }
 
-
-
 //selecting alphabet
 function whichAlphabet(e){
-  $.post("/hangman", {clickedAlpha: e.key}).done(function(){
-    location.reload()
-  })
+  console.log(e.keyCode === 65)
+  if (e.keyCode >= 65 && e.keyCode <= 90){
+    $.post("/hangman", {clickedAlpha: e.key}).done(function(){
+      location.reload()
+    })
+  }
 }
 
 document.addEventListener('keydown', whichAlphabet)
