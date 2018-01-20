@@ -8,48 +8,18 @@ for (let i = 0; i <= wordLength; i++){
   line.classList.add('line')
   line.id = i
   lines.appendChild(line)
-
 }
 
-const letters = document.querySelector(".letters")
-//creating alphabet
-const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('')
-for(let e in alphabet){
-  const letterBox = document.createElement('div')
-  letterBox.id = alphabet[e]
-  letterBox.className ='box'
-  letterBox.textContent = `${letterBox.id}`
-  letters.appendChild(letterBox)
-}
-//creating hidden form
-const form = document.createElement('form')
-form.id = "form_id"
-form.style.display = 'none'
-form.method = "post"
-letters.appendChild(form)
-const input = document.createElement('input')
-input.id = "letter_input"
-const button = document.createElement('button')
-form.appendChild(input)
-form.appendChild(button)
 
-function submitForm(){
-  document.getElementById('form_id').submit()
-}
 
 //selecting alphabet
 function whichAlphabet(e){
-  if(e.target.className !== 'box') return
-  e.target.classList.add = 'clicked'
-  console.log(e.target)
-  let oneAlphabet = e.target.id
-  const inputReady = document.querySelector('#letter_input')
-  inputReady.name = "clickedAlpha"
-  inputReady.value = oneAlphabet
-  submitForm()
+  $.post("/hangman", {clickedAlpha: e.key}).done(function(){
+    location.reload()
+  })
 }
 
-document.addEventListener('click', whichAlphabet)
+document.addEventListener('keydown', whichAlphabet)
 
 const arr = document.querySelector('#arr')
 arr.style.display = 'none'
@@ -63,10 +33,9 @@ function matchingIndex(){
     keys.forEach(function(k){
       arr_parse[k].forEach(function(v){
         const selectedLine = document.querySelector(`[id='${v}']`)
-        const font = document.createElement('h2')
+        const font = document.createElement('p')
         font.textContent = k
         selectedLine.appendChild(font)
-        console.log(selectedLine.textContent)
       })
     })
 }
@@ -76,7 +45,7 @@ const guessNum = document.querySelector('#guess')
 guessNum.style.display = 'none'
 const stick = document.querySelector('.stick')
 const pole = document.createElement('div')
-pole.setAttribute('style','float: left; width: 300px; height: 400px; margin-top: 200px; border-right: 1px solid black')
+pole.setAttribute('style','float: left; width: 300px; height: 400px; margin-top: 20px; border-right: 1px solid black')
 const hr = document.createElement('hr')
 hr.setAttribute('style','transform: rotate(150deg) translateX(0px) translateY(-18px); width: 100px; float:right')
 const head = document.createElement('div')
@@ -92,7 +61,7 @@ legLeft.setAttribute('style','transform: rotate(130deg) translateX(75px) transla
 const legRight = document.createElement('hr')
 legRight.setAttribute('style','transform: rotate(50deg) translateX(247px) translateY(0px); width: 60px;')
 const base = document.createElement('hr')
-base.setAttribute('style','width: 200px; transform: translateX(0px) translateY(610px); border: 1px solid black;')
+base.setAttribute('style','width: 200px; transform: translateX(190px) translateY(430px); border: 1px solid black;')
 switch(guessNum.value){
   case '0':
     stick.appendChild(base)
