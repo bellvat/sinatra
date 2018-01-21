@@ -12,7 +12,6 @@ for (let i = 0; i <= wordLength; i++){
 
 //selecting alphabet
 function whichAlphabet(e){
-  console.log(e.keyCode === 65)
   if (e.keyCode >= 65 && e.keyCode <= 90){
     $.post("/hangman", {clickedAlpha: e.key}).done(function(){
       location.reload()
@@ -24,12 +23,12 @@ document.addEventListener('keydown', whichAlphabet)
 
 const arr = document.querySelector('#arr')
 arr.style.display = 'none'
+let letter = arr.name
+let arr_parse = JSON.parse(arr.value)
 
 matchingIndex()
 
 function matchingIndex(){
-  let letter = arr.name
-  let arr_parse = JSON.parse(arr.value)
   let keys = Object.keys(arr_parse)
     keys.forEach(function(k){
       arr_parse[k].forEach(function(v){
@@ -41,74 +40,85 @@ function matchingIndex(){
     })
 }
 
+
 //building stick figure
 const guessNum = document.querySelector('#guess')
 guessNum.style.display = 'none'
 const stick = document.querySelector('.stick')
 const pole = document.createElement('div')
-pole.setAttribute('style','float: left; width: 300px; height: 400px; margin-top: 20px; border-right: 1px solid black')
+pole.setAttribute('style','float: left; width: 100%; height: 400px; margin-top: 20px')
+const poleLine = document.createElement('hr')
+poleLine.setAttribute('style','width: 350px; transform: rotate(90deg) translateX(195px) translateY(-70px)')
 const hr = document.createElement('hr')
-hr.setAttribute('style','transform: rotate(150deg) translateX(0px) translateY(-18px); width: 100px; float:right')
+hr.setAttribute('style','transform: rotate(150deg) translateX(-10px) translateY(-50px); width: 80px;')
 const head = document.createElement('div')
-head.setAttribute('style','float: right; transform: translateX(40px) translateY(53px);width: 60px; height: 60px; border-radius: 40px; border: 1px solid black')
+head.setAttribute('style','transform: translateX(200px) translateY(53px);width: 60px; height: 60px; border-radius: 40px; border: 1px solid black')
 const bod = document.createElement('hr')
-bod.setAttribute('style', 'width: 100px; transform: rotate(90deg) translateX(154px) translateY(-140px)')
+bod.setAttribute('style', 'width: 100px; transform: rotate(90deg) translateX(92px) translateY(0px)')
 const armLeft = document.createElement('hr')
-armLeft.setAttribute('style','transform: rotate(130deg) translateX(12px) translateY(-173px); width: 50px;')
+armLeft.setAttribute('style','transform: rotate(130deg) translateX(50px) translateY(-20px); width: 50px;')
 const armRight = document.createElement('hr')
-armRight.setAttribute('style','transform: rotate(50deg) translateX(185px) translateY(-50px); width: 50px;')
+armRight.setAttribute('style','transform: rotate(50deg) translateX(40px) translateY(15px); width: 50px;')
 const legLeft = document.createElement('hr')
-legLeft.setAttribute('style','transform: rotate(130deg) translateX(75px) translateY(-220px); width: 60px;')
+legLeft.setAttribute('style','transform: rotate(130deg) translateX(117px) translateY(-73px); width: 60px;')
 const legRight = document.createElement('hr')
-legRight.setAttribute('style','transform: rotate(50deg) translateX(247px) translateY(0px); width: 60px;')
+legRight.setAttribute('style','transform: rotate(50deg) translateX(107px) translateY(65px); width: 60px;')
 const base = document.createElement('hr')
-base.setAttribute('style','width: 200px; transform: translateX(190px) translateY(430px); border: 1px solid black;')
+base.setAttribute('style','width: 200px; transform: translateX(70px) translateY(380px); border: 1px solid black;')
 switch(guessNum.value){
-  case '0':
-    stick.appendChild(base)
-    break
   case '1':
-    stick.appendChild(base)
     stick.appendChild(pole)
+    pole.appendChild(base)
     break
   case '2':
-    stick.appendChild(base)
     stick.appendChild(pole)
-    pole.appendChild(hr)
+    pole.appendChild(base)
+    pole.appendChild(poleLine)
     break
   case '3':
-    stick.appendChild(base)
     stick.appendChild(pole)
+    pole.appendChild(base)
+    pole.appendChild(poleLine)
+    pole.appendChild(hr)
+    break
+  case '4':
+    stick.appendChild(pole)
+    pole.appendChild(base)
+    pole.appendChild(poleLine)
     pole.appendChild(hr)
     pole.appendChild(head)
     break
-  case '4':
-    stick.appendChild(base)
+  case '5':
     stick.appendChild(pole)
+    pole.appendChild(base)
+    pole.appendChild(poleLine)
     pole.appendChild(hr)
     pole.appendChild(head)
     pole.appendChild(bod)
     break
-  case '5':
-    stick.appendChild(base)
+  case '6':
     stick.appendChild(pole)
+    pole.appendChild(base)
+    pole.appendChild(poleLine)
     pole.appendChild(hr)
     pole.appendChild(head)
     pole.appendChild(bod)
     pole.appendChild(armLeft)
     break
-  case '6':
-    stick.appendChild(base)
+  case '7':
     stick.appendChild(pole)
+    pole.appendChild(base)
+    pole.appendChild(poleLine)
     pole.appendChild(hr)
     pole.appendChild(head)
     pole.appendChild(bod)
     pole.appendChild(armLeft)
     pole.appendChild(armRight)
     break
-  case '7':
-    stick.appendChild(base)
+  case '8':
     stick.appendChild(pole)
+    pole.appendChild(base)
+    pole.appendChild(poleLine)
     pole.appendChild(hr)
     pole.appendChild(head)
     pole.appendChild(bod)
@@ -116,9 +126,10 @@ switch(guessNum.value){
     pole.appendChild(armRight)
     pole.appendChild(legLeft)
     break
-  case '8':
-    stick.appendChild(base)
+  case '9':
     stick.appendChild(pole)
+    pole.appendChild(base)
+    pole.appendChild(poleLine)
     pole.appendChild(hr)
     pole.appendChild(head)
     pole.appendChild(bod)
