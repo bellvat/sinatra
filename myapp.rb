@@ -25,7 +25,6 @@ end
 
 post '/hangman' do
   alphabet = params['clickedAlpha']
-  #add_list(alphabet)
   length = @@word.size
   alpha_match(@@word, alphabet)
   place = find_index(@@word, @@arr_alph)
@@ -49,23 +48,19 @@ def get_words(file)
   @@word = lines[num].strip
 end
 
-def add_list(alphabet)
-  if !letter.nil?
-    #@@list << alphabet
-  end
-end
-
 def h_guess(word, letter, right_guess)
   if !letter.nil?
     if @@hangman_guess == 9
       get_words('words.txt')
       @@hangman_guess = 0
       @@arr_alph = []
+      @@list = []
     elsif word.include?(letter)
     elsif right_guess == true
       @@hangman_guess = 0
       get_words('words.txt')
       @@arr_alph = []
+      @@list = []
     else
       @@hangman_guess += 1
     end
@@ -92,6 +87,8 @@ def alpha_match(word, letter)
   if !letter.nil?
     if word.include?(letter)
       @@arr_alph << letter if !@@arr_alph.include?(letter)
+    else
+      @@list << letter if !@@list.include?(letter)
     end
   end
 end

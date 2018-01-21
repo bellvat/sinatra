@@ -9,21 +9,26 @@
   <input id = "word_input" value = "<%= length %>" />
   <input id = 'arr' name= '<%= alphabet %>' value = '<%= place %>'/>
   <input id = 'guess' value='<%= @@hangman_guess %>' />
-  <h2>Let's Play Hangman! <%= @@list %> </h2>
-
+  <h2>Let's Play Hangman!</h2>
+  <h4>Press a letter to begin!</h4>
   <div class='left'>
     <div class='play' >
 
     </div>
-
-    <div class='letters'>
+    <div class ='letters' >
       <% if @@hangman_guess == 9%>
-        <h2> The word is:
-        <%= @@word %> <br/> Press any letter to start a new game!</h2>
+        <h2> The word is: <br/><br/>
+        <%= @@word %> <br/><br/> Press any letter to start a new game!</h2>
       <% elsif right_guess == true %>
         <h2> Awesome job! <br/> Press any letter to start a new game! </h2>
       <% end %>
-
+      <% if !@@list.nil? %>
+        <br/><h3> Keeping track: <br/><br/>
+          <% @@list.each do |l| %>
+            <%= l %>
+          <% end %>
+        </h3>
+      <% end %>
     </div>
   </div>
   <div class='stick'>

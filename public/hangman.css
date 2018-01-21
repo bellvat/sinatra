@@ -2,8 +2,14 @@
   height: 100px;
   overflow:auto;
   margin-bottom: 20px;
+  margin-top: 40px;
+  box-sizing: border-box;
+  float: right;
 }
-
+.letters{
+  float: right;
+  clear: both;
+}
 body{
   text-align: center;
   font-family: sans-serif;
@@ -11,18 +17,19 @@ body{
 
 .line{
   float: left;
-  width: 24px;
-  height: 34px;
+  width: 30px;
+  height: 44px;
   margin: 3px;
   border-bottom: 3px solid black;
   text-align: center;
+  font-size: 22px;
 }
 
 
 .left{
   float:left;
-  position:relative;
-  width: 50%;
+  box-sizing: border-box;
+  width: 40%;
   height: 300px;
 }
 
@@ -31,7 +38,6 @@ body{
   position:relative;
   width: 460px;
   height: 420px;
-  background-color: pink;
 }
 
 hr{
